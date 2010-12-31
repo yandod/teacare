@@ -28,7 +28,7 @@
 			<?= $info['screen_name']?> 
 			(<?php echo $this->html->link('Logout', 'Tweet::logout'); ?>)
 		<?php else: ?>
-			<?php echo $this->html->link('Login', 'Tweet::login'); ?>
+			<?php echo $this->html->link($this->html->image('sign-in-with-twitter-d.png'), 'Tweet::login',array('escape'=>false)); ?>
 		<?php endif;?>
 		</div>
 		<div id="content">
