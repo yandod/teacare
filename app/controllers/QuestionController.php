@@ -2,27 +2,28 @@
 namespace app\controllers;
 use app\models\Question;
 use app\models\Answer;
+use \lithium\storage\Session;
 
 class QuestionController extends \lithium\action\Controller {
+	protected function _init(){
+		parent::_init();
+		$this->info = Session::read('twitter.info');
+	}
+	
 	public function index(){
 		$questions = Question::getQuestions();
-		return compact('questions');
+		$info = $this->info;
+		return compact('questions','info');
 	}
 	
 	public function add(){
-		$data = $this->request->data;
-		$data['timestamp'] = time();
-		$question = Question::create($data);
-		$question->save();
+		$question = Question::newQuestion($this->request->data,$this->info);
 		$this->redirect('question/index');
 	}
 	
 	public function answer(){
-		$data = $this->request->data;
-		$data['timestamp'] = time();
-		$answer = Answer::create($data);
-		$answer->save();
-		$this->redirect('question/index#'.$data['parent']);		
+		Answer::appendAnswer($this->request->data,$this->info);
+		$this->redirect('question/index#'.$this->request->data['parent']);		
 	}
 }
 

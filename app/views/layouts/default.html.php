@@ -18,10 +18,18 @@
 <body class="app">
 	<div id="container">
 		<div id="header">
-			<h1>Application</h1>
+			<h1>NAMIKARE 2010 edition.</h1>
 			<h2>
 				Powered by <?php echo $this->html->link('Lithium', 'http://lithify.me/'); ?>.
 			</h2>
+		<?php if(is_array($info)):?>
+		    <?php //var_dump($info); ?>
+			<?= $this->html->image($info['profile_image_url'],array('width'=>30,'height'=>30)); ?> 
+			<?= $info['screen_name']?> 
+			(<?php echo $this->html->link('Logout', 'Tweet::logout'); ?>)
+		<?php else: ?>
+			<?php echo $this->html->link('Login', 'Tweet::login'); ?>
+		<?php endif;?>
 		</div>
 		<div id="content">
 			<?php echo $this->content(); ?>
