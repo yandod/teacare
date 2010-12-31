@@ -12,7 +12,7 @@ class Answer extends \lithium\data\Model {
 			'profile_image_url' => null
 		);
 		
-		if (is_array($user) && $form['anonymous']) {
+		if (is_array($user) && empty($form['anonymous'])) {
 			$data['userid'] = $user['id'];
 			$data['screen_name'] = $user['screen_name'];
 			$data['profile_image_url'] = $user['profile_image_url'];
