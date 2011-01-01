@@ -55,6 +55,7 @@ class TweetController extends \lithium\action\Controller {
 	}
 
 	public function login() {
+		Session::clear();
 		$token = Session::read('oauth.request');
 		if (empty($token)) {
 			$this->redirect('Tweet::authorize');
